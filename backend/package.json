@@ -2,10 +2,16 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch index.js"
+    "start": "node server.js",
+    "test": "node --test",
+    "test:api-demo": "node scripts/api-demo.js",
+    "seed": "node scripts/seed.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=22.5.0"
   },
   "keywords": [],
   "type": "module",
