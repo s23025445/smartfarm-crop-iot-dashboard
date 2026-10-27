@@ -104,26 +104,6 @@ npm run lint
 npm run build
 ```
 
-### Manual acceptance checklist
-
-Before submission, use the browser and API demo to confirm:
-
-- the initial page shows the three seeded cards and makes Maize available
-- creating Maize displays its latest matching sensor reading
-- a duplicate crop is rejected with HTTP 409
-- editing allowed fields persists and recalculates the card
-- `crop_name` is read-only in the UI and rejected if changed through the API
-- deleting and recreating Maize does not change the sensor JSON
-- the greatest timestamp is selected from the mixed JSON order
-- Faulty Maize produces Sensor Problem and recommended water N/A
-- the historical Wheat value of 120 is labelled Invalid Data in Sensor History
-- moisture boundaries, 35 C and 5 mm follow the required rules
-- successful refresh updates cards, farm status and last-refresh time
-- failed later refresh keeps the last successful results and time
-- first sensor failure shows N/A, Sensor Feed Unavailable and disables Create
-- deleting every card shows the No Crops state
-- malformed sensor data makes `GET /api/readings` return HTTP 500
-
 ## API routes
 
 | Method | Route | Purpose |
