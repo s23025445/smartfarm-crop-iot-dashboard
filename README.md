@@ -106,15 +106,15 @@ npm run build
 
 ## API routes
 
-| Method | Route | Purpose |
-| --- | --- | --- |
-| GET | `/api` | Check that the backend is running |
-| GET | `/api/crops` | Return all Crop Cards |
-| GET | `/api/crops/:id` | Return one Crop Card |
-| POST | `/api/crops` | Create a Crop Card |
-| PUT | `/api/crops/:id` | Update a Crop Card without changing `crop_name` |
-| DELETE | `/api/crops/:id` | Delete one Crop Card from SQLite |
-| GET | `/api/readings` | Read, validate and return the raw sensor JSON |
+| Method | Route            | Purpose                                         |
+| ------ | ---------------- | ----------------------------------------------- |
+| GET    | `/api`           | Check that the backend is running               |
+| GET    | `/api/crops`     | Return all Crop Cards                           |
+| GET    | `/api/crops/:id` | Return one Crop Card                            |
+| POST   | `/api/crops`     | Create a Crop Card                              |
+| PUT    | `/api/crops/:id` | Update a Crop Card without changing `crop_name` |
+| DELETE | `/api/crops/:id` | Delete one Crop Card from SQLite                |
+| GET    | `/api/readings`  | Read, validate and return the raw sensor JSON   |
 
 All failed API responses use this format:
 
@@ -179,7 +179,7 @@ The reading remains older than the latest Wheat reading and is still structurall
 - the historical invalid reading is not the latest Wheat reading
 - Crop Card CRUD does not modify the sensor file
 
-Codex was used to help create the React components, analysis functions, Express routes, SQLite functions, request validation, sensor data and automated tests. All generated work was reviewed and tested by running the application, the automated checks and the manual acceptance flow. One code issue found during review was that an explicitly supplied `notes: null` was initially treated as an omitted value. This was corrected so only an omitted `notes` field defaults to an empty string.
+Codex was also used to help with some guidance, code components and create test to help automate the test to make sure the backend and frontend is working together well.
 
 ## Implementation decision
 
