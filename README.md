@@ -1,6 +1,6 @@
 # SmartFarm Crop IoT Dashboard
 
-This project is a full-stack university assignment using React, Express and SQLite. The backend is complete. The frontend is still under development.
+This project is a full-stack university assignment using React, Express and SQLite. It includes a classic-styled dashboard for managing Crop Cards and viewing simulated IoT sensor data.
 
 ## Project URLs
 
@@ -30,6 +30,27 @@ For a normal start without watch mode, use:
 npm start
 ```
 
+## Run the frontend
+
+Open another terminal in the `frontend` folder and run:
+
+```bash
+npm install
+npm run dev
+```
+
+Open `http://localhost:5173`. Keep the backend running at `http://localhost:3000` while using the dashboard.
+
+The frontend lets the user:
+
+- view each Crop Card with its latest sensor reading
+- see calculated conditions, watering recommendations and alerts
+- create the initially missing Maize card
+- edit Crop Card settings without changing the crop name
+- delete Crop Cards without deleting sensor readings
+- view all sensor readings for a crop in newest-first order
+- refresh the sensor data from the backend
+
 ## Database creation and seeding
 
 Crop Cards are stored in `backend/data/smartfarm.sqlite`. When the backend starts, `db.js` creates the `crops` table if it does not exist. Tomato, Lettuce and Wheat are inserted only when the table is empty. Maize is not seeded because it must be created through the application.
@@ -57,6 +78,18 @@ To see numbered requests, request bodies, status codes and response bodies, run:
 ```bash
 npm run test:api-demo
 ```
+
+## Frontend checks
+
+Run these commands in the `frontend` folder:
+
+```bash
+npm test
+npm run lint
+npm run build
+```
+
+The frontend tests check latest-reading selection, sensor conditions, additional alerts and Overall Farm Status.
 
 ## API routes
 

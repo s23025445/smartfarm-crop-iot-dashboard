@@ -2,7 +2,7 @@
   {
     "crop_name": "Tomato",
     "timestamp": "2026-10-27T08:20:00",
-    "soil_moisture": 44,
+    "soil_moisture": 20,
     "temperature": 38.2,
     "rainfall": 0,
     "sensor_status": "Online",
@@ -176,7 +176,7 @@
     "soil_moisture": 66,
     "temperature": 25.8,
     "rainfall": 2.4,
-    "sensor_status": "Offline",
+    "sensor_status": "Online",
     "notes": "Gateway temporarily unavailable"
   }
 ]
