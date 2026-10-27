@@ -63,15 +63,19 @@ npm run seed
 
 This reset command is intended for development and testing. It deletes existing Crop Card changes.
 
-## Backend tests
+## Testing and acceptance checks
 
-Run the automated tests with:
+The assignment asks students to confirm the acceptance-test table before submission. It does not require every acceptance test to be automated. This project includes small automated tests as extra evidence, while complete browser behaviour is also checked manually and demonstrated in the video.
+
+### Backend automated tests
+
+From the `backend` folder, run:
 
 ```bash
 npm test
 ```
 
-The Crop Card tests reset the real development database before and after testing.
+The backend suite checks Crop Card CRUD, request validation, duplicate and immutable crop names, sensor-file validation, crop counts, timestamps, the intentional invalid reading and JSON error responses. The Crop Card tests reset the real development database before and after testing.
 
 To see numbered requests, request bodies, status codes and response bodies, run:
 
@@ -79,17 +83,46 @@ To see numbered requests, request bodies, status codes and response bodies, run:
 npm run test:api-demo
 ```
 
-## Frontend checks
+The API demo is a student-friendly test script that prints each numbered request, request body, status code and response body.
 
-Run these commands in the `frontend` folder:
+### Frontend automated tests
+
+From the `frontend` folder, run:
 
 ```bash
 npm test
+```
+
+These tests use Node's built-in test runner. They check available dropdown names, exact case-sensitive matching, greatest-timestamp selection, moisture boundaries, Sensor Problem priority, temperature and rainfall boundaries, and Overall Farm Status. A larger React testing library is not required for this assignment.
+
+### Frontend quality checks
+
+From the `frontend` folder, run:
+
+```bash
 npm run lint
 npm run build
 ```
 
-The frontend tests check latest-reading selection, sensor conditions, additional alerts and Overall Farm Status.
+### Manual acceptance checklist
+
+Before submission, use the browser and API demo to confirm:
+
+- the initial page shows the three seeded cards and makes Maize available
+- creating Maize displays its latest matching sensor reading
+- a duplicate crop is rejected with HTTP 409
+- editing allowed fields persists and recalculates the card
+- `crop_name` is read-only in the UI and rejected if changed through the API
+- deleting and recreating Maize does not change the sensor JSON
+- the greatest timestamp is selected from the mixed JSON order
+- Faulty Maize produces Sensor Problem and recommended water N/A
+- the historical Wheat value of 120 is labelled Invalid Data in Sensor History
+- moisture boundaries, 35 C and 5 mm follow the required rules
+- successful refresh updates cards, farm status and last-refresh time
+- failed later refresh keeps the last successful results and time
+- first sensor failure shows N/A, Sensor Feed Unavailable and disables Create
+- deleting every card shows the No Crops state
+- malformed sensor data makes `GET /api/readings` return HTTP 500
 
 ## API routes
 
@@ -125,6 +158,8 @@ The backend never stores calculated conditions, recommendations, alerts, the lat
 `crop_name` is the exact, case-sensitive key used to join a Crop Card with its sensor readings. For example, `Tomato` matches `Tomato`, but it does not match `tomato`.
 
 The frontend must filter readings by `crop_name` and select the greatest timestamp. It must not assume that the last reading in the JSON array is the newest.
+
+Exact matching was verified with a frontend test showing that `Tomato` matches while `tomato` returns no reading. Crop-name uniqueness was verified through backend tests that reject a duplicate with HTTP 409 and reject names that do not exist in the validated sensor file. The latest-timestamp tests use deliberately mixed reading order, and the sensor tests verify all four required latest cases.
 
 ## Dashboard decision priority
 
@@ -164,7 +199,7 @@ The reading remains older than the latest Wheat reading and is still structurall
 - the historical invalid reading is not the latest Wheat reading
 - Crop Card CRUD does not modify the sensor file
 
-Codex was also used to help create the Express routes, SQLite functions, request validation and automated tests. One code issue found during review was that an explicitly supplied `notes: null` was initially treated as an omitted value. This was corrected so only an omitted `notes` field defaults to an empty string.
+Codex was used to help create the React components, analysis functions, Express routes, SQLite functions, request validation, sensor data and automated tests. All generated work was reviewed and tested by running the application, the automated checks and the manual acceptance flow. One code issue found during review was that an explicitly supplied `notes: null` was initially treated as an omitted value. This was corrected so only an omitted `notes` field defaults to an empty string.
 
 ## Implementation decision
 

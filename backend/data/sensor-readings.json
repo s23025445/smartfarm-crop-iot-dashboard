@@ -68,7 +68,7 @@
     "soil_moisture": 59,
     "temperature": 30.6,
     "rainfall": 0,
-    "sensor_status": "Faulty",
+    "sensor_status": "Online",
     "notes": "Sensor requires inspection"
   },
   {

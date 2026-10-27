@@ -47,6 +47,13 @@ test("latest reading uses the greatest timestamp", () => {
   );
 });
 
+test("crop name matching is exact and case-sensitive", () => {
+  const readings = [reading()];
+
+  assert.equal(getLatestReading("Tomato", readings), readings[0]);
+  assert.equal(getLatestReading("tomato", readings), null);
+});
+
 test("moisture boundaries are Healthy", () => {
   assert.equal(analyseCrop(crop, reading({ soil_moisture: 55 })).condition, "Healthy");
   assert.equal(analyseCrop(crop, reading({ soil_moisture: 75 })).condition, "Healthy");
